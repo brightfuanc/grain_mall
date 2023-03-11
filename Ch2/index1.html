@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>语法的综合应用</title>
+    <script type="text/javascript" src="../vue/js/vue.js"></script>
+    <style>
+        .class1{background: red;color:blue;font-size:32px;}
+    </style>
+</head>
+<body>
+    <div id="vue">
+        <p>1.文本插值:我的姓名是{{myName}}。</p>
+        <p>2.使用v-html指令: <span v-html="htmlCode"></span></p>
+        <p>3.使用v-bind指令: <a v-bind:href="url" v-bind:title="title">中国教育和科研计算机网</a>
+        </p>
+        <p>4.1数值表达式绑定: 5+5*3={{5+5*3}}</p>
+        <p>4.2函数表达式绑定:若x={{x}}, 则x<sup>2</sup>+5={{Math.pow(x,2)+5}}</p>
+        <p>4.3条件表达式绑定:若yesNo值为{{yesNo}},则我的选择是{{yesNo?'确定':'取消'}}。 </p>
+        <p>5.语句不会生效: var score = 95</p> <!-- {{var score = 95}}-->
+        <p>
+            <label for="r1">修改颜色</label>
+            <input type="checkbox" v-model="use" id="r1">
+        </p>
+        <div v-bind:class="{'class1':use}">使用v-bind指令绑定样式</div>
+        <div :style="{'color':color,'font-size':fontsize+'px'}">输出文本</div>
+        <div :style="styles">输出文本2</div>
+    </div>
+    <script type="text/javascript">
+        var myViewModel=new Vue({
+            el:"#vue",
+            data:{
+                myName:'储久良',
+                htmlCode:'<b>这些信息是使用b标记的显示效果！</b>',
+                url:"http://www.edu.cn",
+                title:'Edu',
+                x:10,
+                yesNo:true,
+                use:true,
+                fontsize:40,
+                color:'red',
+                styles:{color:'#ff00ff','font-size':'40px'},
+            } ,
+        });
+    </script>
+</body>
+</html>

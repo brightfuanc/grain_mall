@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <title>Element数据组件-表格的应用</title>
+    <!--引入vue.js和element的 CSS和JS-->
+    <link rel="stylesheet" href=" ../vue/element/index.css">
+    <script src=" ../vue/js/vue.js"></script>
+    <script src="../vue/element/index.js"></script>
+    <style type="text/cSs">
+        #app {margin: 0 auto; width: 800px;font-size: 24px;}
+        el-table { font-size:24px;}
+    </style>
+    </head>
+    <body>
+        <div id="app">
+            <!--表格组件效果:带边框、带斑马分固定表斗，固定列、自定义列模板-->
+            <h3 style="text-align: center; ">学生信息一览表</h3>
+            <el-table :data="tableData" style="width: 100%" stripe borderheight='300' max-height='300'>
+                <el-table-column fixed prop="date" label="入学日期" width="100" align= 'center'></el-table-column>
+                <el-table-column prop="name" label="性名" width="150" align='center'></el-table-column>
+                <el-table-column prop="age" label="年龄" width='50'></el-table-column>
+                <el-table-column prop="province" label="省份" width='100'></el-table-column>
+                <el-table-column prop="className" label="班级"></el-table-column>
+                <el-table-column fixed="right" label="操作" width="160">
+                    <template slot-scope="scope">
+                        <el-button eclick="handleClick (scope.row)" type="text" size= "small">查看</el-button>
+                        <el-button type="text" size="small">编辑</el-button>
+                    </template>
+                </el-table-column>
+            </el-table>
+        </div>
+        <script>
+        var myViewModel =new Vue({
+            el: '#app',
+            data: {
+                tableData: [{
+                    date:'2019-04-02',
+                    name:'王小双',
+                    province: '江苏省',
+                    className: '2019计算机1班',
+                    age: 21
+                },{
+                    date: '2019-05-08',
+                    name: '李小龙',
+                    province: '安徽省',
+                    className: '2019电子信息2班',
+                    age:20
+                },{
+                    date: '2019-07-01',
+                    name:'张小明',
+                    province: '山东省',
+                    className: '2019市场营销3班',
+                    age:20
+                }, {
+                    date: '2019-08-03',
+                    name:'陈小娟',
+                    province: '山西省',
+                    className: '2019电气工程5班',
+                    age: 19
+                }],
+            },
+            methods:{
+                handleClick(row){
+                    alert(row.name + '\n' + row.className)
+                }
+            },
+        })
+        </script>
+    </body>
+</html>

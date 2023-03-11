@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>实训3.1</title>
+<script type="text/javascript" src="../vue/js/vue.js"></script>
+</head>
+<body>
+    <div id="vue-ex-31">
+        <div v-bind:style="divStyle">
+            <label for="">识别号</label><input type="text" v-model='id '><br>
+            <label for="">姓名</label><input type="text" v-model='name '><br>
+            <input type="button" value="添加" v-on:click="add">
+            <input type="button" value="清空" @click='clear'>
+        </div>
+        <h3>人员列表清单(以复选框形式输出)</h3>
+        <p v-for="user in users" v-bind:key="user.id">
+            <input type="checkbox">{{user.id}}---{{user.name}}
+        </p>
+        <!-- 需要遍历已有的用户-->
+    </div>
+        <!--定义Vue实例-->
+        <script>
+            var myViewModel=new Vue({
+                //配置相关选项
+                el: "#vue-ex-31",
+                data:{
+                    divStyle:{
+                        border: "1px solid black",
+                        width:500+"px",
+                        height:108+"px",
+                        padding:"20px"
+                    },
+                    id:'',
+                    name:'',
+                    users:[
+                        {id:1,name:"张清华"},
+                        {id:2,name:"袁振兴"},
+                        {id:3, name: "赵小燕"},
+                        {id:4,name:"李阳阳"}
+                    ]
+                },
+                methods:{
+                    add(){
+                        this.users.unshift({
+                            id:this.id,name:this.name
+                        })
+                    },
+                    clear(){
+                        this.id='';
+                        this.name='';
+                    },
+                }
+            })      
+    </script>
+</body>
+</html>

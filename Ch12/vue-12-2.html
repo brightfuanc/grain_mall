@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>组件化构建应用</title>
+        <script src="../vue/js/vue.global.js" type="text/javascript"></script>
+    </head>
+    <body>
+        <div id="todo-list-app">
+            <ol>
+                <todo-item v-bind:todo="item" v-for="item in groceryList" v-bind:key="item.id">
+                </todo-item>
+            </ol>
+        </div>
+        <script type="text/javascript">
+        //定义 createApp()选项对象
+        const TodoList = {
+            data() {
+                return {
+                    groceryList:[
+                        {id: 0,text: '上午8:30五楼会议室开会'},
+                        {id: 1,text: '下午14:00走访学生宿舍'},
+                        {id: 2,text: '晚上在4302召开班会'}
+                    ]
+                }
+            }
+        }
+        //创建app实例对象
+        const app = Vue.createApp (TodoList)
+        //全局定义组件todo-item
+        app.component('todo-item',{
+            props: ['todo'],
+            template: `<li>{{ todo.text }}</li>`
+        })
+        //挂载到容器上
+        app.mount('#todo-list-app')
+        </script>
+    </body>
+</html>

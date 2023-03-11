@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>用户注册信息</title>
+    <script type="text/javascript" src="../vue/js/vue.js"></script>
+    <style type="text/css">
+    .fields{
+        width: 500px;height: 250px;background: gray;padding: 50px;margin: 0 auto;
+    }
+    input{
+        border-radius: 5px;height: 23px;border: 2px dashed rgb(232, 10, 10);
+    }
+    [type="submit"]
+    [type="reset"]{
+        margin: 10px auto;height: 35px;width: 300px;
+        background: rgb(24, 235, 175);color: white;padding: 0 20px;
+    }   
+    </style>
+</head>
+<body>
+    <div id="vue">
+        <!--表单中完成数据绑定和事件绑定-->
+        <fieldset v-bind:class="stuclass">
+        <legend align="center">用户信息注册</legend>
+        账号:<input type="text" v-model="username">
+        密码:<input type="text" v-model="password">
+        邮箱: <input type="text" size="50e" name="" id="" readonly v-model="email" @keyup="getAddress"/><br>
+        <input type="submit" name="" id="" value="          提交          "/>
+        <input type="reset" name="" id="" value="          重置          "/>
+        </fieldset>
+        <fieldset>
+            <legend align="center">信息调查表</legend>
+            账号:<input type="text" placeholder="输入账号"v-model="username">
+            
+            密码:<input type="text" placeholder="输入密码"v-model="password">
+            邮箱:<input type="text" placeholder="输入邮箱"v-model="email">
+            
+            <p>您的姓名:{{username}}</p>
+            <p>邮箱:{{password}}</p>
+            <p>邮箱:{{email}}</p>
+            <p>您的性别:{{sex})</p>
+            <input type="radio" id="man" value="男"v-model="sex"/>男<input type="radio" id=" woman" value="女" v-model="sex"/>女<p>您的选择:{{mySelected)}</p>
+            <select name="" v-model="mySelected" multiple>
+            </select>
+        </fieldset>    
+    </div>
+    <script type="text/javascript">
+        var myViewModel=new Vue({
+            el:"#vue",
+            data:{
+                stuclass:"fields",
+                username:"",
+                password:"",
+                email:"",
+            },
+            },
+            watch:{
+                province:{
+                    handler(newVal,oldVal){
+                        this.province=newVal;
+                    },
+                    immediate:true,
+                    deep:true
+                },
+                city:{
+                    handler(newVal,oldVal){
+                        this.city=newVal;
+                        console.log(oldVal)
+                    },
+                    immediate:true,
+                    deep:true
+                },
+                street:{
+                    handler(newVal,oldVal){
+                        this.street=newVal;
+                        console.log(oldVal)
+                    },
+                    immediate:true,
+                    deep:true
+                }
+            }
+        });
+</body>
+</html>

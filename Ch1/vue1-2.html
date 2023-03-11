@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>template标记与Script标记接合使用</title>
+    <script type="text/javascript" src="../vue/js/vue.js"></script>
+</head>
+<body>
+    <template id="vue">
+        <p>模板内容，再次单击...</p>
+    </template>
+    <div id="div1">
+        <p>普通内容</p>
+    </div>
+    <button onclick="useTemp()">单击加载模板内容</button>
+    <script type="text/javascript">
+        function $(id){
+            return document.getElementById(id)
+        }
+        function useTemp(){
+            var newTemp=$("vue").content.cloneNode(true);
+            $("div1").appendChild(newTemp)
+        }
+    </script>
+</body>
+</html>

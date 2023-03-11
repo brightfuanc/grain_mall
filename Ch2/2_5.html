@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>计算属性缓存与方法比较应用</title>
+<script type="text/javascript" src="../vue/js/vue.js"></script>
+</head>
+<body>
+    <h3>计算属性缓存与方法比较应用</h3>
+    <div id="vue25">
+        <p>数组元素为: {{arrayNumber}}</p>
+        <p>使用computed: maxNumber, 数组中最大值为{{ maxNumber }}</p>
+        <p>使用methods: minNumber(), 数组中最小值为{{ minNumber() }}</p>
+    </div >     
+    <script type="text/javascript">
+        var myViewModel=new Vue({
+            el:"#vue25",
+            data:{
+                arrayNumber: [100, -200, 308,78,25,56, 110]
+            } ,
+            computed:{
+                maxNumber: function(){
+                    var max = this.arrayNumber[0] ;//this指向myViewModel
+                    for (var i=1;i< this.arrayNumber.length; i++) {
+                        max = (this.arrayNumber[i]>= max) ? this.arrayNumber[i] : max;
+                    }
+                    return max;
+                }
+            },
+            methods: {
+                minNumber: function(){
+                    var min = this.arrayNumber[0];//this指向myViewModel
+                    for (var i =1; i< this.arrayNumber.length; i++) {
+                        min= (this.arrayNumber[i] <= min) ? this.arrayNumber[i] : min;
+                    }
+                    return min;
+                }
+            }
+        })
+    </script>
+</body>
+</html>

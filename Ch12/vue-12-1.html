@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset = "utf-8">
+        <!-- <script src="https://unpkg.com/vue@next"></script> -->
+        <script type="text/javascript" src="../vue/js/vue.global.js">
+        </script>
+        <title>Vue 3.0-createApp()-计数器</title>
+    </head>
+    <body>
+        <div id="counter">
+            <p>默认自动计数，单击"停止计数器"，计数器不变。</p>
+            <p>Counter: {{ counter }}</p>
+            <p>{{msg}}</p>
+            <button @click="stopCounter">停止计数器</button>
+        </div>
+        <script type = "text/javascript">
+            const Counter = {
+                data() {
+                    return {
+                        counter:0,
+                        msg : 'Vue 3.0已经发布，又要开始学习啦！',
+                        timer: ''
+                    }
+                },
+                mounted(){ //每秒加1
+                    const timer = setInterval(() => {
+                        this.counter++
+                    },1000)
+                    this.timer = timer
+                },
+                methods: {
+                    stopCounter() { //清除定时执行
+                        clearInterval(this.timer)
+                        this.timer = ''
+                    }
+                }
+            }
+            Vue.createApp(Counter).mount('#counter')
+        </script>
+    </body>
+</html>
+
+

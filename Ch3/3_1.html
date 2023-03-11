@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Vue 条件渲染相关指令的使用</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<script type="text/javascript" src="../vue/js/vue.js"></script>
+</head>
+<body>
+    <h3>条件渲染相关指令的使用</h3>
+    <div id= "vue31">
+        <div>
+            <h4>1.使用v-if、v-else指令显示现隐藏信息</h4>
+            <button type="button" v-on:click="changeFlag() ">{{flag}}显示/隐藏</button>
+            <p v-if="flag">1.v-if指令:当 flag为{{flag}}时，我闪亮登场!</p>
+            <pv-else>2.v-else指令:当flag为{{flag}}时，哎呀!我暴露了!</p>
+            <template v-if="flag">
+                <h4>模板内容</h4>
+                <p>Vue.js易学易用!</p>
+            </template>
+        </div>
+        <div id="">
+            <h4>2.使用v-if、v-else-if、 v-else指令实现成绩百分制转五级制</h4>
+            输入成绩:<input type="text" name="" v-model="number"/>
+            <p v-if="number>=90">成绩等级为优秀!</p>
+            <p v-else-if="number>=80">成绩等级为良好!</p>
+            <p v-else-if="number>=70">成绩等级为中等!</p>
+            <p v-else-if="number>=60">成绩等级为合格!</p>
+            <p v-else>成绩等级为不合格!</p>
+        </div>
+    </div>
+        <script type="text/javascript">
+        var myViewModel = new Vue({
+        el: '#vue31',
+        data:{
+            flag: true,
+            number: 97,
+        },
+        methods:{
+            changeFlag(){
+                this.flag= (this.flag) ?false : true
+            }
+        }
+    })
+    </script>
+</body>
+</html>

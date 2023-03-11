@@ -1,0 +1,109 @@
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>表单组件-表单验证</title>
+        <link rel="stylesheet" href="../vue/element/index.css">
+        <script type="text/javascript" src="../vue/js/vue.js"></script>
+        <script type="text/javascript" src="../vue/element/index.js"></script>
+        <style type= "text/css">
+            #app{width: 800px; border: 1px solid black; }
+            .demo-ruleForm{width: 700px;}
+        </style>
+    </head>
+    <body>
+        <div id="app">
+            <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label- width="100px" class="demo-ruleForm">
+                <el-form-item label="用户名" prop="name">
+                    <el-input v-model="ruleForm.name"></el-input>
+                </el-form-item>
+                <el-form-item label="密码" prop="password">
+                    <el-input v-model="ruleForm.password"></el-input>
+                </el-form-item>
+                <el-form-item label="爱好"prop="type">
+                    <el-checkbox-group v-model="ruleForm.type">
+                        <el-checkbox label="美食" name="type"></el-checkbox>
+                        <el-checkbox label="运动" name="type"></el-checkbox>
+                        <el-checkbox label="看书" name="type"></el-checkbox>
+                        <el-checkbox label="游戏" name="type"></el-checkbox>
+                    </el-checkbox-group>
+                </el-form-item>
+                <el-form-item label="性别" prop="resource">
+                    <el-radio-group v-model="ruleForm.resource">
+                        <el-radio label="男"></el-radio>
+                        <el-radio label="女"></el-radio>
+                    </el-radio-group>
+                </el-form-item>
+                <el-form-item label="籍贯" prop="region">
+                    <el-select v-model="ruleForm.region" placeholder="请选择">
+                        <el-option label="上海" value="shanghai"></el-option>
+                        <el-option label="北京" value="beijing" ></el-option>
+                        <el-option label="武汉" value="wuhan"></el-option>
+                    </el-select>
+                </el-form-item>
+                <el-form-item label="职业" prop="region">
+                    <el-select v-model="ruleForm.region" placeholder="请选择">
+                        <el-option label="学生" value="shanghai"></el-option>
+                        <el-option label="老师" value="beijing" ></el-option>
+                        <el-option label="军人" value="wuhan"></el-option>
+                    </el-select>
+                </el-form-item>
+                
+                <el-form-item>
+                    <el-button type="primary" @click="submitForm ('ruleForm')">提交</el-button>
+                    <el-button @click="resetForm ( 'ruleForm')">重置</el-button>
+                </el-form-item>
+            </el-form>
+    </div>
+    <script>
+        var myviewModel =new Vue({
+            el: '#app',
+            data: {
+                ruleForm:{
+                    name:'',
+                    password:'',
+                    region:'',
+                    type: [],
+                    resource:'',
+                },
+                rules: {
+                    name: [
+                        {required:true, message:'请输入用户名',trigger: 'blur'},
+                        {min: 2, max: 5, message: '长度在2~5个字符',trigger: 'blur'}
+                    ],
+                    password: [
+                        {required:true, message:'请输入密码', trigger: 'blur'},
+                        {min: 8, max: 20, message: '长度在8~20个字符',trigger: 'blur'}
+                    ],
+                    region: [
+                        {required:true, message:'请选择籍贯',trigger:'change'},
+                    ],
+                    type: [
+                        {type:'array', required: true, message:'请至少选择一个爱好', trigger:'change'},
+                    ],
+                    resource: [
+                        {required: true, message:'请选择性别',trigger:'change'},
+                    ],
+                }
+            },
+            methods: {
+                submitForm(formName) {
+                    this.$refs[formName].validate((valid)=>{
+                        if(valid) {
+                            alert( 'submit! ');
+                        }else {
+                            console.log( 'error submit! !');
+                            return false;
+                        }
+                    });
+                },
+                resetForm(formName) {
+                    this.$refs[formName].resetFields ();
+                }
+            }
+        })
+        </script>
+    </body>
+</html>
+

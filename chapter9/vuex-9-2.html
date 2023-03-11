@@ -1,0 +1,70 @@
+<!-- vuex-9-2.html -->
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>简单状态管理-store模式</title>
+		<script src="../vue/js/vue.js" charset="utf-8"></script>
+	</head>
+	<body>
+		<h1>2个Vue实例对象共享store</h1>
+		<div id="app1">
+			<p> app1:共享状态数据-{{sharedState.message}},私有数据-{{privateState.name}} </p>
+			<button type="button" v-on:click="setMessage()">改变共享信息</button>
+		</div>
+		<div id="app2">
+			<p> app2:共享状态数据-{{sharedState.message}},私有数据-{{privateState.name}} </p>
+			<button type="button" @click="clearMessage()">清空共享信息</button>
+		</div>
+		<script type="text/javascript">
+			//定义共享store 
+			var store = {
+				state: {
+					message: '初始信息-大家好！'
+				},
+				//所有store中state的改变，都放置在store自身的action中去管理,mutation
+				setMessageAction(newValue) {
+					console.log('setMessageAction 触发 with', newValue);
+					this.state.message = newValue;
+				},
+				clearMessageAction() {
+					console.log('clearMessageAction 触发');
+					this.state.message = '';
+				}
+			}
+			//定义两个实例
+			var vmA = new Vue({
+				el: '#app1',
+				data: {
+					privateState: {
+						name: 'vmA',
+						age: 10,
+					},
+					sharedState: store.state
+				},
+				//actions
+				methods: {
+					setMessage() {
+						store.setMessageAction('变更信息-大家辛苦啦！');
+					}
+				}
+			})
+			var vmB = new Vue({
+				el: '#app2',
+				data: {
+					privateState: {
+						name: 'vmB',
+						age: 15,
+					},
+					sharedState: store.state
+				},
+				//actions
+				methods: {
+					clearMessage() {
+						store.clearMessageAction();
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <link rel="stylesheet" href="../vue/element/index.css">
+        <script type="text/javascript" src="../vue/js/vue.js"></script>
+        <script type="text/javascript" src="../vue/element/index.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <!--使用基础组件-按钮-->
+            <el-button @click="visible = true">Button</el-button>
+            <!--使用其他组件-对话框-->
+            <el-dialog :visible.sync="visible" width="30%" title="这是其他组件-对话框">
+                <p>初次使用Element!</p>
+            </el-dialog>
+        </div>
+    </body>
+    <script type="text/javascript">
+        var myViewModel=new Vue({
+            el:"#app",
+            data:{
+                visible: false
+            } ,
+        });
+    </script>
+</html>

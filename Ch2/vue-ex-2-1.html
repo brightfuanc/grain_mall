@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style type="text/css">
+        .fields{
+            width: 500px;height: 250px;background: gray;padding: 50px;margin: 0 auto;
+        }
+        input{
+            border-radius: 5px;height: 23px;border: 2px dashed rgb(232, 10, 10);
+        }
+        [type="submit"]
+        [type="reset"]{
+            margin: 10px auto;height: 35px;width: 300px;
+            background: rgb(24, 235, 175);color: white;padding: 0 20px;
+        }
+    </style>
+    <title>学生地址信息采集</title>
+    <script type="text/javascript" src="../vue/js/vue.js"></script>
+</head>
+<body>
+    <div id="vue-ex-21">
+        <!--表单中完成数据绑定和事件绑定-->
+        <fieldset v-bind:class="stuclass">
+        <legend align="center">学生地址信息采集</legend>
+        姓名:<input type="text" v-model="name">
+        <hr color=" #white">
+        省份:<input type="text" v-model="province" v-on:keyup="getAddress"/><br>
+        城市:<input type="text" v-model="city" @keyup="getAddress"/><br>
+        县、区或街道:<input type="text" v-model="street" @keyup="getAddress"/><br>
+        家庭地址: <input type="text" size="50e" name="" id="" readonly v-model="address" @keyup="getAddress"/><br>
+        <input type="submit" name="" id="" value="          提交          "/>
+        <input type="reset" name="" id="" value="          重置          "/>
+        </fieldset>    
+    </div>
+    <script type="text/javascript">
+        var myViewModel=new Vue({
+            el:"#vue-ex-21",
+            data:{
+                stuclass:"fields",
+                name:"",
+                province:"",
+                city:"",
+                street:"",
+                address:""
+            },
+            methods:{
+                getAddress(){
+                    this.address=this.province+" "+this.city+" "+this.street;
+                }
+            },
+            watch:{
+                province:{
+                    handler(newVal,oldVal){
+                        this.province=newVal;
+                    },
+                    immediate:true,
+                    deep:true
+                },
+                city:{
+                    handler(newVal,oldVal){
+                        this.city=newVal;
+                        console.log(oldVal)
+                    },
+                    immediate:true,
+                    deep:true
+                },
+                street:{
+                    handler(newVal,oldVal){
+                        this.street=newVal;
+                        console.log(oldVal)
+                    },
+                    immediate:true,
+                    deep:true
+                }
+            }
+        });
+    </script>
+</body>
+</html>

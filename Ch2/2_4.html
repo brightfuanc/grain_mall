@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <title>计算属性应用场景</title>
+    <script type="text/javascript"src="../vue/js/vue.js"></script></head>
+    <body>
+        <h3>计算属性的应用</h3>
+        <div id="app">
+            <p>数组元素为：{{Number}}</p>
+            <p>计算属性：最大值为：{{maxNumber}}</p>
+            <p>计算属性：最小值为：{{minNumber}}</p>
+        </div>
+        <script type="text/javascript">
+            var myViewModel = new Vue({
+                el:'#app',
+                data: {Number:[100,-200,308,78,25,56,110]},
+                computed: {
+                    maxNumber: function() {
+                        var max = this.Number[0];//this指向myViewMode1实例
+                        for (var i = 1; i < this.Number.length; i++) {
+                            max= (this.Number[i] >= max)? this.Number[i]:max;
+                            //if(this.number[i]>max) max=this.number[i];
+                        }
+                        return max;
+                    },
+                    minNumber:function() {
+                        var min = this.Number[0];//this指向myViewModel实例
+                        for (var i = 1; i < this.Number.length; i++) {
+                            min= (this.Number[i] <= min)? this.Number[i]:min;
+                        }
+                        return min;
+                    },
+                }
+            })
+        </script>
+    </body>
+</html>

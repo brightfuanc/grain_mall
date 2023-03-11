@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+    <style type="text/css">
+        .css1{width: 50px;text-align: right;padding: 10px;margin: 0 auto;}
+        .css2{text-align: center;}
+    </style>
+    <link rel="stylesheet" href="../vue/element/index.css">
+    <script type="text/javascript" src="../vue/js/vue.js"></script>
+    <script type="text/javascript" src="../vue/element/index.js"></script></head>
+    <body>
+        <div id="app">
+            <el-button type="primary" @click="visible=true">登录对话框</el-button>
+            <el-dialog :visible.sync="visible" width="30%" title="用户登录">
+                <el-container>
+                    <el-main>
+                        <el-container>
+                            <div class="css1">帐号:</div><el-input v-model="username" placeholder="请输入帐号"></el-input>
+                        </el-container><p></p>
+                        <el-container>
+                            <div class="css1">密码：</div><el-input type="password" v-model="password" placeholder="请输入密码"></el-input>
+                        </el-container><p></p>
+                        <el-footer class="css2">
+                            <el-button type="primary" click="visible=false">确定</el-button>
+                            <el-button @click="visible=false">取消</el-button>
+                        </el-footer>
+                    </el-main>
+                </el-container>
+            </el-dialog>
+            用户名:{{username}}，密码:{{password}}
+        </div>
+        <script type="text/javascript">
+            var myViewModel=new Vue({
+                el:"#app",
+            data:{
+                username:"",
+                password:"",
+                visible:false
+            },
+        });
+        </script>
+    </body>
+</html>                    

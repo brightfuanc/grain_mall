@@ -1,0 +1,58 @@
+<!-- vue-5-1.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"><title>组件基础</title>
+    <script type="text/javascript" src="../vue/js/vue.js"></script>
+    <style type="text/css">
+        button {
+        border: 1px dotted blue;border-radius: 4px;
+        width: 100px;height: 40px; margin: 5px 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id= "vue51">
+        <h3>定义全局组件与复用</h3>
+        <my-con></my-com>
+        <my-com></my-com>
+        <my-com></my-com>
+        <mybutton2></mybutton2>
+        <h3>定义局部组件</h3>
+        <mybuttonl></mybuttonl>
+    </div>
+    <script type="text/javascript">
+    //通过一个普通的Javascript对象定义组件
+    var componentA ={
+        template: '<h1>h1-JS自定义局部组件-A组件</h1>'
+    };
+    var componentB= {
+        data: function() {
+            return{
+            title:"我自己定义的标题信息!"
+            }
+        },
+        template: '<div><p>多个 HTML元素时,使用根元素div</p><h3 v-bind:title="title">h3-JS自定义全局组件-B组件,盘旋会有提示</h3></div>'
+        };  
+        //全局注册组件,定义一个计算器的按钮
+        Vue.component( 'my-com', {
+            data: function() {
+                return{
+                count: 0,
+                }
+            },
+            template: '<button v-on:click="count++">单击{{count}}次按钮</button>',
+            })
+            Vue.component( 'mybutton2' ,componentB)
+            var myViewModel = new Vue({
+                el: '#vue51',
+                data: {},
+                methods: {},
+                components: {
+                    mybutton1 :componentA,
+                }
+            })
+        </script>
+    </body>
+</html>
+

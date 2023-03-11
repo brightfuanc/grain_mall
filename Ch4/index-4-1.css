@@ -1,0 +1,30 @@
+/*定义图层的样式*/
+.divl {margin:0 auto;width:950px; border: 1px dashed #55ed89;}
+/*设置表格样式*/
+table{
+    border: 1px solid #42B983;text-align: center;
+    width: 950px;border-collapse: collapse;
+}
+/*定义表格表头样式*/
+th {background: #ABB983;}
+/*定义表格行的样式*/
+.trl {height:50px; padding: 5px auto;}
+/*定义h5样式*/
+h5{
+    text-align: center; color: #0033cc; padding: 15px;
+    background: #AFAFAF;font-size: 28px; height: 58px;
+}
+/*定义input样式*/
+input{
+    border-radius: 8px; width: 140px;
+    height: 35px; border: 1px dashed #008000;
+}
+/*定义button和超链接样式*/
+button,
+.btn-success {
+    border-radius:8px;width: 80px; height: 35px;
+    background: #008000;color:white;
+}
+/*定义超链接样式*/
+a {padding: 8px 10px;}
+

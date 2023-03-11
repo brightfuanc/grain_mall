@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Document</title>
+        <script type="text/javascript" src="../vue/js/vue.js"></script>
+    </head>
+    <body>
+        <div id="vue4">
+            <h3>数组对象遍历</h3>
+            <ul>
+                <li v-for="(shopping,index) in shoppings">
+                    {{index+1}}-{{shopping.bookName}}-{{shopping.issn}}-{{shopping.author}}
+                </li>
+            </ul>         
+            <h3>数字遍历</h3>
+            <span v-for="count in 20">{{count}} </span>
+            <h3>对象的属性遍历</h3>
+            <ul>
+                <li v-for="(value, key, index) in student">
+                    {{index}}-{{key}}-{{value}}
+                </li>
+            </ul>
+            <h3>普通数组遍历</h3>
+            <ul>
+                <li v-for="(value,index) in array"><!--value in array --> 
+                    {{index}}-{{value}}<!-- {{value}} -->
+                </li>
+            </ul>
+            <div id="">
+                <h3>绑定key对象数组遍历</h3>
+                <label>序号:</label><input type="text" v-model="id" placeholder="输入序号"/>
+                <label>姓名:</label><input type="text" v-model="name" placeholder="输入姓名"/>
+                <button type="button" v-on:click="addStudent">添加学生名单</button>
+                <p v-for="user in students" v-bind:key="user.id">
+                    <input type="checkbox" />{{user.id}}--{{user.name}}
+                </p>
+            </div>
+        </div>
+        <script type="text/javascript">
+            var myViewModel = new Vue({
+                el:"#vue4",
+                data: {
+                    shoppings: [{
+                        bookName: "web前端开发技术",
+                        issn:'9787302488637',
+                        author:"储久良"
+                        },
+                        {
+                        bookName: "vue.js实战",
+                        issn :'9787302484929',
+                        author:"梁景"
+                        },
+                        {
+                        bookName: "Spring Boot+Vue全栈开发实战",
+                        issn: '9787302517979',
+                        author:"王松"
+                        }
+                    ],
+                    student:{
+                        name:'储久良',
+                        class: '19软件工程3班',
+                        age:20
+                    },
+                    array: [100,200,300,205,110,96],
+                    students: [{
+                            id: 1,
+                            name:'张开民'
+                        },
+                        {
+                            id: 2,
+                            name:'宋小明'
+                        }
+                    ],
+                    id: '',
+                    name:''
+                },
+                methods:{
+                    addstudent: function(){
+                    //在数组末尾添加新元素
+                    //this.students.push({id:this.id, name:this.name})
+                    //在数组开头添加新元素
+                    this.students.unshift({
+                        id: this.id,
+                        name: this.name,
+                        })
+                    }
+                }
+            })
+        </script>
+    </body>
+</html>

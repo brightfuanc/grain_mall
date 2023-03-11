@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script type="text/javascript" src="../vue/js/vue.js"></script>
+        <title>组件间相互通信</title>
+        <style type="text/css">
+            .childGirl {border: 1px dotted black;}
+            .childBoy {border: 1px dashed black;}
+            .childGirl,
+            .childBoy {
+                width: 350px;
+                height: 200px;
+                padding: 10px;
+                border-radius: 10px;
+                display: inline-block;
+                margin: 5px;
+            }
+            #app{
+                margin: 0 auto;
+                width: 800px;
+                height: 350px;
+                border: 15px solid #cacaca;
+                text-align: center;
+            }
+            button,
+            input{
+                border-radius: 10px;
+                height: 24px;
+                border: 1px dashed #0000fe;
+            }
+            img{
+                width: 36px;
+                height: 36px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="app">
+            <h2>友谊聊吧</h2>
+            <girl></girl>
+            <boy></boy>
+        </div>
+        <div class="*">
+            <h1><img src="ex-5-1-kt-*.jpg" /></h1>
+            <input type="text" required placeholder="请发言" v-model="*" />
+            <button @click="*">发送信息</button>
+                <textarea name="" id="*" cols="32" rows="4"></textarea>
+            </div>
+        <script>
+            var bus=new Vue();
+            Vue.component('girl',{
+                data(){
+                    return{
+                    girlInput:"",
+                }
+            },
+            methods: {
+                sendToBoy(){
+                    //给小弟发送消息,触发msgToBoy事件
+                    bus.$emit("msgToBoy",this.girlInput);
+                    this.girlInput="";
+                }
+            },
+            created(){
+            busthis.$on("msgToGirl", function (msg){
+                //将聊天记录写在多行文本域中,并记录发表时间
+                var mydate=(new Date()).toLocaleTimeString();
+                document.getElementById("girl").innerHTML+=mydate+":【"+msg+"】\n";
+            });
+        },
+        template: `
+        <div class=childGirl">
+        <h1><img src="ex-5-1-kt-gril.jpg"/></h1>
+        <input type="text" required placeholder="请发言" v-model="grilInput"/>
+        <button @click="sendToBoy">发送信息</button><br/><br/>
+        <textarea name="" id="girl" cols="32" rows=""4"></textarea>
+        </div>
+        `
+        });
+        Vue.componet('boy',{
+            data(){
+                return{
+                    boyInpt:"",
+                }
+            },
+            template:`
+            <div class=childBoy">
+            <h1><img src="ex-5-1-kt-boy.jpg"/></h1>
+            <input type="text" required placeholder="请发言" v-model="boyInput"/>
+            <button @click="sendToGirl">发送信息</button><br/><br/>
+            <textarea name="" id="boy" cols="32" rows=""4"></textarea>
+            </div>
+            `,
+            Vmethod:{
+                sendToGirl(){
+                    bus.$emit('msgToGirl',this.boyInput);
+                    this.boyInput="";
+                }
+            },
+            mounted(){
+                bus.$on('msgToBoy',function(msg){
+                    var mydate=(new Date()).toLocaleTimeString();
+                    document.getElementById("boy").innerHTML+=mydate+":【"+msg+"】\n";
+                })
+            }
+        })
+        var myViewModel=new Vue({
+            el:"#app",
+            })
+        </script>
+    </body>
+</html>

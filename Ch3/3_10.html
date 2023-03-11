@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<script type="text/javascript" src="../vue/js/vue.js"></script>
+</head>
+<body>
+    <div id="vue39">
+        <fieldset>
+            <legend align="center">信息调查表</legend>
+            姓名:<input type="text" placeholder="输入姓名"v-model="myName">
+            <p>您的姓名:{{myName}}</p>
+            <p>建议或意见:{{message}}</p>
+            <textarea v-model="message" placeholder="请输入您的建议或意见"></textarea>
+            <p>您的兴趣与爱好:{{checkMyLove}}</p>
+            <input type="checkbox" id="music" value="音乐" v-model=" checkMyLove">音乐
+            <input type="checkbox" id="network" value="网络小说" v-model="checkMyLove">网络小说
+            <input type="checkbox" id="game" value="网游"v-model="checkMyLove">网游
+            <p>您的性别:{{sex}}</p>
+            <input type="radio" id="man" value="男"v-model="sex"/>男<input type="radio" id=" woman" value="女" v-model="sex"/>女<p>您的选择:{{mySelected}}</p>
+            <select name="" v-model="mySelected" multiple>
+            <option disabled value="">请选择</option>
+            <option value="Java程序设计">Java程序设计</option><option value="算法设计与分析">算法设计与分析</option><option value="计算机网络">计算机网络</option>
+            <option value="数据挖掘与分析">数据挖掘与分析</option>
+            </select>
+        </fieldset>
+    </div>
+    <script type="text/javascript">
+        var myViewModel=new Vue({
+            el:"#vue39",
+            data:{
+                myName:'',
+                message:'',
+                checkMyLove:[],
+                sex:'',
+                mySelected:[],
+            } ,
+        });
+    </script>
+</body>
+</html>

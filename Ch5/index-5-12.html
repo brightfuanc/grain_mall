@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>具名插槽的应用</title>
+    <script type="text/javascript" src=" . ./vue/js/vue.js"></script>
+    <style type="text/css">
+        .comp {width: 450px; border: 1px dotted black; padding: 10px;}
+        #app {border: 1px dotted green; width :500px; padding: 10px;}
+    </style>
+</head>
+    <body>
+        <div id="app">
+            <h2>这是父组件...</h2>
+            <child>
+                <p>使用匿名插槽--该内容将显示在匿名插槽内。</p>
+                <template v-slot:slot1>
+                    <h3>使用v-slot指令--该内容将显示在具名插槽slot1内。</h3>
+                </template>
+                <h3 slot='slot2'>使用slot属性--该内容将显示在具名插槽slot2内。</h3>
+            </child>
+        </div>
+        <script type="text/javascript">
+        //子组件中设有3个slot，其中两个为具名插槽，一个为匿名插槽
+            const Comp1 ={
+                template: `
+                <div class="comp">
+                    <h3>这是子组件...</h3>
+                        <slot name='slot1'></slot>
+                        <slot name='slot2'></slot>
+                        <slot></slot>
+                    <p>以上是具名插槽与匿名插槽的使用区别。</p>
+                </div>
+                `
+            }
+            var myViewModel = new Vue({
+                el:'#app',
+                components:{'child': Comp1,}
+            })
+        </script>
+    </body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script type="text/javascript" src="../vue/js/vue.js"></script>
+        <title>Document</title>
+    </head>
+    <body>
+        <!-- vue53是Vue 实例挂载的元素，在挂载元素范围内使用组件 -->
+        <div id="vue53">
+            <h3>我的待办事项-日期: {{today}}</h3>
+            <mytodo :todo-data="myToDos"></mytodo>
+        </div>
+    </body>
+    <script>
+        /*调用extend ()方法创建组件（组件构造器），非具体的组件实例*/
+        //构建一个子组件，使用字符串模板（反引号表示）
+        var todoChild = Vue.extend({
+            template: ` <li> {{ text }} </li> `,
+            props: {
+                text: {type: String, default: ''}
+            }
+        })
+        //构建一个父组件，使用字符串模板（反引号表示）
+        var todoParent = Vue.extend({
+            template:`
+        <ul>
+            <todo-item
+                v-for="(item, index) in todoData"
+                v-text="item.text"  v-bind:key="item.id">
+            </todo-item>
+        </ul>
+        `,
+            props: {
+                todoData: {type: Array, default: []},
+            },
+            //注册局部子组件
+            components: {todoItem:todoChild}
+        })
+        //注册全局组件mytodo
+        Vue.component ('mytodo', todoParent)
+        //定义 Vue 实例
+        var myViewModel = new Vue({
+            el:'#vue53',
+            data: {
+                today: (new Date()).toLocaleDateString(),
+                myToDos: [
+                {id: 0,text: '8:00~10:00上课'},
+                {id: 1,text: '10:20~11:00开会'},
+                {id: 2,text: '11:10~11:55技术讨论会'}
+                ]
+            }
+        })
+    </script>
+</html>

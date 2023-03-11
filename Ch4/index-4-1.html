@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>实战-简易图书管理</title>
+    <script type="text/javascript" src="../vue/js/vue.js"></script>
+    <link rel="stylesheet" type="text/css" href="index-4-1.css"/>
+</head>
+    <body>
+        <div id='vue41'>
+            <div class="div1">
+                <h5>简易图书管理</h5>
+                <p>
+                    <label>id:<input type="text" placeholder="请输入序号" v-model="id" required></label>
+                    <label>图书名称:<input type="text" placeholder="请输入图书名称" v-model="bookname" required > </label>
+                    <label>出版社:<input type="text" placeholder="请输入出版社" v-model="press"required> </label>
+                    <label>作者:<input type="text" placeholder="请输入作者" v-model="author"required> </label>
+                    <button @click="add">添加</button><br>
+                </p>
+                <p>
+                    <label>请输入搜索关键字:
+                        <input type="text" placeholder="请输入搜索关键字" v-model="keyword">
+                    </label>
+                    <button @click="search(keyword)">搜索</button>
+                </p>
+                <table border="1">
+                    <thead>
+                        <tr v-bind:class="trClass">
+                            <th>序号</th>
+                            <th>图书名称</th>
+                            <th>出版社</th>
+                            <th>作者</th>
+                            <th>时间</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="(item,i) in search(keyword)" :key="item.id" v-bind:class="trClass">
+                            <td>{{item.id}}</td>
+                            <td>{{item.bookname}}</td>
+                            <td>{{item.press}}</td>
+                            <td>{{item.author}}</td>
+                            <td>{{item.ptime|dateFormat}}</td>
+                            <td>
+                                <a href="#" class="btn-success" @click.prevent="">{{item.operation[0]}}</a>
+                                <a href="#" class="btn-success" @click.prevent="deleteBook(i)">{{item.operation[1]}}</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>    
+        <script type="text/javascript" src="index-4-1.js"></script>
+    </body>
+</html>
